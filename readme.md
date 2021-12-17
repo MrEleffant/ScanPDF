@@ -1,0 +1,2 @@
+# packages
+npm i puppeteer
