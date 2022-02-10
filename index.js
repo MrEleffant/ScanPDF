@@ -6,14 +6,14 @@ const puppeteer = require('puppeteer');
     headless: true ,
   });
 
-  let from = 1
-  let maxChap = 100
+  let from = 220
+  let maxChap = 227
   const url = 'https://www.scan-vf.net/one_piece/chapitre-'
   // const url = 'https://www.scan-fr.cc/manga/one-piece/'
 
   for (let chap = from; chap < maxChap; chap++) {
     let fullURL = url+chap+'/1'
-    let fullUrlPage2 = url+chap+'/4'
+    let fullUrlPage2 = url+chap+'/7'
 
     // console.log(fullUrlPage2)
     const page = await browser.newPage();
