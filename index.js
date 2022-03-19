@@ -3,19 +3,18 @@ const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch({
     pipe: true,
-    headless: true ,
+    headless: true,
   });
 
-  let from = 311
-  let maxChap = 350
+  let from = 388
+  let maxChap = 388
   const url = 'https://www.scan-vf.net/one_piece/chapitre-'
-  // const url = 'https://www.scan-vf.net/one_piece/'
   // const url = 'https://www.scan-fr.cc/manga/one-piece/'
-  
+  // const url = 'https://www.scan-vf.net/one_piece/'
 
-  for (let chap = from; chap < maxChap; chap++) {
+  for (let chap = from; chap < maxChap+1; chap++) {
     let fullURL = url+chap+'/1'
-    let fullUrlPage2 = url+chap+'/2'
+    let fullUrlPage2 = url+chap+'/3'
 
     // console.log(fullUrlPage2)
     const page = await browser.newPage();
@@ -23,6 +22,7 @@ const puppeteer = require('puppeteer');
     await page.goto(fullUrlPage2, {
       waitUntil: 'networkidle2',
     });
+    await wait(1000)
     const elem = await page.$(".img-responsive.scan-page");
     const boundingBox = await elem.boundingBox();
     // console.log('boundingBox', boundingBox)
@@ -61,6 +61,7 @@ const puppeteer = require('puppeteer');
       // });
       
       console.log(`Chapitre ${chap} téléchargé - ${boundingBox.height} x ${boundingBox.width}`)
+      await wait(2000);
       await page.close(); 
       
     }, 2000)
